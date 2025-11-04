@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:plants/screens/categories.dart';
 import 'package:plants/screens/plants.dart';
 import 'package:plants/models/plant.dart';
+import 'package:plants/widgets/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -62,6 +63,7 @@ class _TabsScreenState extends State<TabsScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(activePageTitle)),
+      drawer: MainDrawer(),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
