@@ -4,15 +4,24 @@ import 'package:plants/screens/plant_detail.dart';
 import 'package:plants/widgets/plant_item.dart';
 
 class PlantsScreen extends StatelessWidget {
-  const PlantsScreen({super.key, required this.title, required this.plants});
+  const PlantsScreen({
+    super.key,
+    this.title,
+    required this.plants,
+    required this.onToggleFavorite,
+  });
 
-  final String title;
+  final String? title;
   final List<Plant> plants;
+  final void Function(Plant plant) onToggleFavorite;
 
   void selectPlant(BuildContext context, Plant plant) {
     // Navigator.of(context).pop();
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (ctx) => PlantDetailScreen(plant: plant)),
+      MaterialPageRoute(
+        builder: (ctx) =>
+            PlantDetailScreen(plant: plant, onToggleFavorite: onToggleFavorite),
+      ),
     );
   }
 
@@ -46,8 +55,12 @@ class PlantsScreen extends StatelessWidget {
       );
     }
 
+    if (title == null) {
+      return content;
+    }
+
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(title: Text(title!)),
       body: content,
     );
   }

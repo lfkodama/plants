@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:plants/models/plant.dart';
 
 class PlantDetailScreen extends StatelessWidget {
-  const PlantDetailScreen({super.key, required this.plant});
+  const PlantDetailScreen({
+    super.key,
+    required this.plant,
+    required this.onToggleFavorite,
+  });
 
   final Plant plant;
+  final void Function(Plant plant) onToggleFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,17 @@ class PlantDetailScreen extends StatelessWidget {
         .toList();
 
     return Scaffold(
-      appBar: AppBar(title: Text(plant.popularTitle)),
+      appBar: AppBar(
+        title: Text(plant.popularTitle),
+        actions: [
+          IconButton(
+            onPressed: () {
+              onToggleFavorite(plant);
+            },
+            icon: Icon(Icons.star),
+          ),
+        ],
+      ),
       body: Column(
         children: [
           Image.network(
